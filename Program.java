@@ -142,7 +142,6 @@ public class Program {
     }
 
     public static void main(String[] args) {
-        long time1 = System.currentTimeMillis();
         String path = "part2data/";
         ArrayList<Instance> trainingInstances = readFile(new File(path + args[0]));
         ArrayList<Instance> testInstances = readFile(new File(path + args[1]));
@@ -162,9 +161,6 @@ public class Program {
         
         System.out.println("3.\n");
         predict(test, testInstances);
-        long time2 = System.currentTimeMillis();
-
-        System.out.println("\n Time taken: " + (time2 -time1) + "ms");
     }
 }
 
