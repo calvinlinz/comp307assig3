@@ -129,8 +129,8 @@ public class Program {
             System.out.println(scoreX + ",         " + scoreY + ",     " + s + ",   " + instance.classString);
         }
 
-        double accuracy = (double) count / (double) testInstances.size();
-        System.out.println("Total Accuracy:" + accuracy);
+        double accuracy = 100 * (double) count / (double) testInstances.size();
+        System.out.println("Total Accuracy:" + accuracy + "%");
     }
 
     public static double score(Map<String, TreeNode> test, Instance instance, String classString) {
