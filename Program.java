@@ -53,12 +53,6 @@ public class Program {
         return instances;
     }
 
-    // CLASSIFY
-    public static List<Instance> classify(List<Instance> trainingInstances, List<Instance> testInstances) {
-        ArrayList<Instance> newList = new ArrayList<>();
-        return newList;
-    }
-
     public static Map<String, TreeNode> training(List<Instance> trainingInstances) {
         Map<String, TreeNode> test = new HashMap<String, TreeNode>();
         for (String classString : classes) {
@@ -108,27 +102,18 @@ public class Program {
     }
 
     public static void predict(Map<String, TreeNode> test, List<Instance> testInstances) {
-
         double count = 0;
-
-
         System.out.println("No-recurrence-probability,     Recurrence-probability,         Predicted,    Actual");
-
-        String output = "";
         for (Instance instance : testInstances) {
             double scoreX = score(test, instance, "no-recurrence-events");
             double scoreY = score(test, instance, "recurrence-events");
 
-            if (scoreX > scoreY && instance.classString.equals("no-recurrence-events")) {
+            if ((scoreX > scoreY && instance.classString.equals("no-recurrence-events")) ||scoreX < scoreY && instance.classString.equals("recurrence-events") ) {
                 count++;
-            } else if (scoreX < scoreY && instance.classString.equals("recurrence-events")) {
-                count++;
-            }
-
+            } 
             String s = scoreX > scoreY ? "no-recurrence" : "recurrence";
             System.out.println(scoreX + ",         " + scoreY + ",     " + s + ",   " + instance.classString);
         }
-
         double accuracy = 100 * (double) count / (double) testInstances.size();
         System.out.println("Total Accuracy:" + accuracy + "%");
     }
@@ -149,16 +134,17 @@ public class Program {
 
         String classOutputs = "";
         System.out.println("1.\n");
-        for(String label : test.keySet()){
+        for (String label : test.keySet()) {
             classOutputs += "P(" + label + ") = " + test.get(label).toString() + "\n";
-            for(String feature : test.get(label).data.keySet()){
-                for(String value : test.get(label).data.get(feature).data.keySet()){
-                    System.out.println("P("+feature+" = "+value+" | " + label +") = " +test.get(label).data.get(feature).data.get(value).toString());
+            for (String feature : test.get(label).data.keySet()) {
+                for (String value : test.get(label).data.get(feature).data.keySet()) {
+                    System.out.println("P(" + feature + " = " + value + " | " + label + ") = "
+                            + test.get(label).data.get(feature).data.get(value).toString());
                 }
             }
         }
-        System.out.println("\n2.\n\n"+ classOutputs);
-        
+        System.out.println("\n2.\n\n" + classOutputs);
+
         System.out.println("3.\n");
         predict(test, testInstances);
     }
@@ -188,7 +174,7 @@ class TreeNode {
         this.prob = prob;
     }
 
-    public String toString(){
+    public String toString() {
         return String.valueOf(prob);
     }
 }

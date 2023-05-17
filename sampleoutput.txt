@@ -121,4 +121,4 @@ No-recurrence-probability,     Recurrence-probability,         Predicted,    Act
 3.1504865826699285E-4,         8.934762413310772E-6,     no-recurrence,   recurrence-events
 3.912394516967168E-5,         6.483884504037111E-5,     recurrence,   recurrence-events
 4.101703929078482E-5,         5.283165151437647E-5,     recurrence,   recurrence-events
-Total Accuracy:0.8
+Total Accuracy:80.0%
